@@ -2,8 +2,8 @@
 
 
 import unittest
-from parser import *
-from parser.vlog_module import VlogPModule
+from syntax import *
+from syntax.vlog_module import VlogPModule
 from elements import ElemPort
 
 

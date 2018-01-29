@@ -2,7 +2,7 @@
 
 
 import unittest
-from parser.vlog_stmt import VlogStmt
+from syntax.vlog_stmt import VlogStmt
 
 
 __author__ = 'mochen'

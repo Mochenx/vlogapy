@@ -1,7 +1,7 @@
 #encoding = utf-8
 
 import unittest
-from parser import *
+from syntax import *
 from pyparsing import ParserElement
 
 

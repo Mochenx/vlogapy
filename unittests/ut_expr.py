@@ -1,7 +1,7 @@
 #encoding = utf-8
 
 import unittest
-from parser.vlog_expr import VlogExpr
+from syntax.vlog_expr import VlogExpr
 
 
 __author__ = 'mochen'

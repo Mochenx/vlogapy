@@ -1,7 +1,7 @@
 # encoding = utf-8
 
 import unittest
-from parser.vlog_primitive import VlogPrimitive
+from syntax.vlog_primitive import VlogPrimitive
 from random import randrange
 
 

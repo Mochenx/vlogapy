@@ -2,8 +2,8 @@
 
 
 import unittest
-from parser.vlog_stmt import VlogStmt
-from parser.vlog_declaration import VlogDeclaration
+from syntax.vlog_stmt import VlogStmt
+from syntax.vlog_declaration import VlogDeclaration
 from pyparsing import cStyleComment, cppStyleComment
 
 

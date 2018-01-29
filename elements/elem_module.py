@@ -1,6 +1,6 @@
 from collections import OrderedDict
 from elements.base import ElementBase, SymbolTable, VlogSyntaxError
-from parser.vlog_general import str_list_net_type
+from syntax.vlog_general import str_list_net_type
 
 __author__ = 'uaer'
 
