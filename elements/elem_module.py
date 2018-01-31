@@ -1,8 +1,13 @@
 from collections import OrderedDict
-from elements.base import ElementBase, SymbolTable, VlogSyntaxError
-from syntax.vlog_general import str_list_net_type
+from .base import ElementBase, SymbolTable, VlogSyntaxError
 
-__author__ = 'uaer'
+try:
+    from syntax.vlog_general import str_list_net_type
+except ImportError:
+    from vlogapy.syntax.vlog_general import str_list_net_type
+
+
+__author__ = 'mochen'
 
 
 class ElemModule(ElementBase):

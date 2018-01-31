@@ -82,43 +82,47 @@ class VlogPrimitive(VlogBase):
         ##############################
         name_of_gate_inst = identifier('Name') + Optional(_range)
         pull_gate_inst = Optional(name_of_gate_inst) + LPARENTH + self.output_term + RPARENTH
-        pass_enable_switch_inst = Optional(name_of_gate_inst) + (LPARENTH + self.inout_term + COMMA +
+        pass_enable_switch_inst = Optional(name_of_gate_inst)('InstName') + (LPARENTH + self.inout_term + COMMA +
                                                                  self.inout_term + COMMA +
                                                                  self.enable_term + RPARENTH)
-        pass_switch_inst = Optional(name_of_gate_inst) + (LPARENTH + self.inout_term + COMMA +
-                                                          self.inout_term + RPARENTH)
+        pass_switch_inst = Optional(name_of_gate_inst)('InstName') + Group(LPARENTH + self.inout_term + COMMA +
+                                                                           self.inout_term + RPARENTH)('Ports')
         # In n_output_gate_inst, delimitedList(self.output_term) + COMMA  => OneOrMore(self.output_term + COMMA)
-        n_output_gate_inst = Optional(name_of_gate_inst) + (LPARENTH + OneOrMore(self.output_term + COMMA) +
-                                                            self.input_term + RPARENTH)
-        n_input_gate_inst = Optional(name_of_gate_inst) + (LPARENTH + self.output_term + COMMA +
-                                                           delimitedList(self.input_term) + RPARENTH)
-        enable_gate_inst = Optional(name_of_gate_inst) + (LPARENTH + self.output_term + COMMA +
-                                                          self.input_term + COMMA +
-                                                          self.enable_term + RPARENTH)
-        mos_switch_inst = Optional(name_of_gate_inst) + (LPARENTH + self.output_term + COMMA +
-                                                         self.input_term + COMMA +
-                                                         self.enable_term + RPARENTH)
-        cmos_switch_inst = Optional(name_of_gate_inst) + (LPARENTH + self.output_term + COMMA +
-                                                          self.input_term + COMMA +
-                                                          self.ncontrol_term + COMMA +
-                                                          self.pcontrol_term + RPARENTH)
-        gate_inst = ((self.cmos_switchtype('Type') + Optional(self.decl.delay3) +
-                      delimitedList(cmos_switch_inst) + SEMI)
-                     | (self.enable_gatetype('Type') + Optional(self.decl.drive_strength) +
-                        Optional(self.decl.delay3) + delimitedList(enable_gate_inst) + SEMI)
-                     | (self.mos_switchtype('Type') + Optional(self.decl.delay3) +
-                        delimitedList(mos_switch_inst) + SEMI)
-                     | (self.n_input_gatetype('Type') + Optional(self.decl.drive_strength) +
-                        Optional(self.decl.delay2) + delimitedList(n_input_gate_inst) + SEMI)
-                     | (self.n_output_gatetype('Type') + Optional(self.decl.drive_strength) +
-                        Optional(self.decl.delay2) + delimitedList(n_output_gate_inst) + SEMI)
-                     | (self.pass_en_switchtype('Type') + Optional(self.decl.delay2) +
-                        delimitedList(pass_enable_switch_inst) + SEMI)
-                     | (self.pass_switchtype('Type') + delimitedList(pass_switch_inst) + SEMI)
-                     | ((Keyword('pulldown')('Type') + self.pulldown_strength + delimitedList(pull_gate_inst) + SEMI) |
-                        (Keyword('pulldown')('Type') + delimitedList(pull_gate_inst) + SEMI))
-                     | ((Keyword('pullup')('Type') + self.pullup_strength + delimitedList(pull_gate_inst) + SEMI) |
-                        (Keyword('pullup')('Type') + delimitedList(pull_gate_inst) + SEMI)))
+        n_output_gate_inst = Optional(name_of_gate_inst)('InstName') + Group(LPARENTH +
+                                                                             OneOrMore(self.output_term + COMMA) +
+                                                                             self.input_term + RPARENTH)('Ports')
+        n_input_gate_inst = Optional(name_of_gate_inst)('InstName') + Group(LPARENTH + self.output_term + COMMA +
+                                                                            delimitedList(self.input_term) +
+                                                                            RPARENTH)('Ports')
+        enable_gate_inst = Optional(name_of_gate_inst)('InstName') + Group(LPARENTH + self.output_term + COMMA +
+                                                                           self.input_term + COMMA +
+                                                                           self.enable_term + RPARENTH)('Ports')
+        mos_switch_inst = Optional(name_of_gate_inst)('InstName') + Group(LPARENTH + self.output_term + COMMA +
+                                                                          self.input_term + COMMA +
+                                                                          self.enable_term + RPARENTH)('Ports')
+        cmos_switch_inst = Optional(name_of_gate_inst)('InstName') + Group(LPARENTH + self.output_term + COMMA +
+                                                                           self.input_term + COMMA +
+                                                                           self.ncontrol_term + COMMA +
+                                                                           self.pcontrol_term + RPARENTH)('Ports')
+        gate_inst = ((self.cmos_switchtype('Type') + Optional(self.decl.delay3)('delay') +
+                      delimitedList(cmos_switch_inst)('Instances') + SEMI)
+                     | (self.enable_gatetype('Type') + Optional(self.decl.drive_strength)('strength') +
+                        Optional(self.decl.delay3)('delay') + delimitedList(enable_gate_inst)('Instances') + SEMI)
+                     | (self.mos_switchtype('Type') + Optional(self.decl.delay3)('delay') +
+                        delimitedList(mos_switch_inst)('Instances') + SEMI)
+                     | (self.n_input_gatetype('Type') + Optional(self.decl.drive_strength)('strength') +
+                        Optional(self.decl.delay2)('delay') + delimitedList(n_input_gate_inst)('Instances') + SEMI)
+                     | (self.n_output_gatetype('Type') + Optional(self.decl.drive_strength)('strength') +
+                        Optional(self.decl.delay2)('delay') + delimitedList(n_output_gate_inst)('Instances') + SEMI)
+                     | (self.pass_en_switchtype('Type') + Optional(self.decl.delay2)('delay') +
+                        delimitedList(pass_enable_switch_inst)('Instances') + SEMI)
+                     | (self.pass_switchtype('Type') + delimitedList(pass_switch_inst)('Instances') + SEMI)
+                     | ((Keyword('pulldown')('Type') + self.pulldown_strength('strength') +
+                         delimitedList(pull_gate_inst)('Instances') + SEMI) |
+                        (Keyword('pulldown')('Type') + delimitedList(pull_gate_inst)('Instances') + SEMI))
+                     | ((Keyword('pullup')('Type') + self.pullup_strength('strength') +
+                         delimitedList(pull_gate_inst)('Instances') + SEMI) |
+                        (Keyword('pullup')('Type') + delimitedList(pull_gate_inst)('Instances') + SEMI)))
 
         return gate_inst
 

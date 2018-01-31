@@ -2,8 +2,11 @@
 
 from .vlog_general import *
 from .vlog_base import *
-from pyparsing import oneOf, Forward, delimitedList, Group, Optional, ZeroOrMore, OneOrMore, dblQuotedString
 
+try:
+    from pyparsing import oneOf, Forward, delimitedList, Group, Optional, ZeroOrMore, OneOrMore, dblQuotedString
+except ImportError:
+    from vlogapy.pyparsing import oneOf, Forward, delimitedList, Group, Optional, ZeroOrMore, OneOrMore, dblQuotedString
 
 __author__ = 'mochen'
 

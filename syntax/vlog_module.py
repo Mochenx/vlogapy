@@ -1,7 +1,5 @@
 # encoding = utf-8
 
-from elements import ElemModule, ElemExportPort, ElemPort
-from pyparsing import (Group, ZeroOrMore, oneOf, Optional, delimitedList, Suppress, Keyword, Forward, OneOrMore)
 from .vlog_base import *
 from .vlog_declaration import VlogDeclaration
 from .vlog_expr import VlogExpr, UNI_OP, BIN_OP
@@ -9,6 +7,13 @@ from .vlog_general import *
 from .vlog_primitive import VlogPrimitive
 from .vlog_specify import VlogSpecify
 from .vlog_stmt import VlogStmt
+
+try:
+    from elements import ElemModule, ElemExportPort, ElemPort
+    from pyparsing import (Group, ZeroOrMore, oneOf, Optional, delimitedList, Suppress, Keyword, Forward, OneOrMore)
+except ImportError:
+    from vlogapy.elements import ElemModule, ElemExportPort, ElemPort
+    from vlogapy.pyparsing import (Group, ZeroOrMore, oneOf, Optional, delimitedList, Suppress, Keyword, Forward, OneOrMore)
 
 __author__ = 'mochen'
 

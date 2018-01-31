@@ -3,7 +3,11 @@
 from .vlog_general import *
 from .vlog_base import *
 from .vlog_expr import VlogExpr
-from pyparsing import (Group, ZeroOrMore, Optional, delimitedList, Keyword, oneOf, )
+
+try:
+    from pyparsing import (Group, ZeroOrMore, Optional, delimitedList, Keyword, oneOf, )
+except ImportError:
+    from vlogapy.pyparsing import (Group, ZeroOrMore, Optional, delimitedList, Keyword, oneOf, )
 
 
 __author__ = 'mochen'

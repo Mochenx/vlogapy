@@ -4,3 +4,5 @@ from .vlog_source import VlogSource
 
 
 __author__ = 'mochen'
+
+__all__ = ['VlogSource']

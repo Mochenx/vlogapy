@@ -1,11 +1,14 @@
 #encoding = utf-8
 
-from pyparsing import Forward, Keyword, Group, Optional, OneOrMore, ZeroOrMore, oneOf, delimitedList
 from .vlog_general import *
 from .vlog_base import *
 from .vlog_expr import VlogExpr
 from .vlog_declaration import VlogDeclaration
 
+try:
+    from pyparsing import Forward, Keyword, Group, Optional, OneOrMore, ZeroOrMore, oneOf, delimitedList
+except ImportError:
+    from vlogapy.pyparsing import Forward, Keyword, Group, Optional, OneOrMore, ZeroOrMore, oneOf, delimitedList
 
 __author__ = 'mochen'
 

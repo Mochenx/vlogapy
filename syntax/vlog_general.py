@@ -1,6 +1,9 @@
 #encoding = utf-8
 
-from pyparsing import (alphas, alphanums, Regex, nums, Combine, Optional, Word, Suppress, oneOf, ZeroOrMore, Keyword)
+try:
+    from pyparsing import (alphas, alphanums, Regex, nums, Combine, Optional, Word, Suppress, oneOf, ZeroOrMore, Keyword)
+except ImportError:
+    from vlogapy.pyparsing import (alphas, alphanums, Regex, nums, Combine, Optional, Word, Suppress, oneOf, ZeroOrMore, Keyword)
 
 
 __author__ = 'mochen'

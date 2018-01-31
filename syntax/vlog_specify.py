@@ -1,8 +1,10 @@
 #encoding = utf-8
 
-from .vlog_general import *
 from .vlog_base import *
-from pyparsing import (Group, ZeroOrMore, Keyword, Regex, )
+try:
+    from pyparsing import (Group, ZeroOrMore, Keyword, Regex, )
+except ImportError:
+    from vlogapy.pyparsing import (Group, ZeroOrMore, Keyword, Regex, )
 
 
 __author__ = 'mochen'

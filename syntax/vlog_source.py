@@ -2,9 +2,12 @@
 
 
 from .vlog_base import *
-from pyparsing import ZeroOrMore, Combine, oneOf, restOfLine, cppStyleComment, cStyleComment
 from .vlog_module import VlogPModule
 
+try:
+    from pyparsing import ZeroOrMore, Combine, oneOf, restOfLine, cppStyleComment, cStyleComment
+except ImportError:
+    from vlogapy.pyparsing import ZeroOrMore, Combine, oneOf, restOfLine, cppStyleComment, cStyleComment
 
 __author__ = 'mochen'
 
