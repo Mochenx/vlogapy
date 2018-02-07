@@ -5,7 +5,10 @@ from .vlog_base import *
 from .vlog_expr import VlogExpr
 from .vlog_stmt import VlogStmt
 from .vlog_declaration import VlogDeclaration
-from pyparsing import (Group, Keyword, oneOf, Optional, delimitedList, OneOrMore)
+try:
+    from pyparsing import (Group, Keyword, oneOf, Optional, delimitedList, OneOrMore)
+except ImportError:
+    from vlogapy.pyparsing import (Group, Keyword, oneOf, Optional, delimitedList, OneOrMore)
 
 
 __author__ = 'mochenx'
